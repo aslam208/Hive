@@ -1,0 +1,8 @@
+create external table ext_employee(
+emp_id int,
+location string,
+emial_id string)
+row format delimited
+fields terminated by ','
+location '/tmp/employee.csv'
+
