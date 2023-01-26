@@ -33,4 +33,17 @@ row format delimited
 fields terminated by ','
 collection items terminated by ':'
 
+#query with array column type
+select id, name, skill[0] from tbl_skill;
+
+# check length, check a word and sort the array
+
+select id,
+name,
+array_contains(skill,"JAVA") AS has_skill,
+sort_array(skill)
+from tbl_skill;
+
+
+
 
