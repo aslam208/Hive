@@ -1,0 +1,8 @@
+create table tbl_employee(emp_id int, location string, email_id string)
+row format delimited
+fields terminated by ',';
+
+# Load data from local file system
+
+load data local inpath 'file:///employee.csv' into table tbl_employee;
+
