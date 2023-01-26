@@ -4,5 +4,5 @@ location string,
 emial_id string)
 row format delimited
 fields terminated by ','
-location '/tmp/employee.csv'
+location '/tmp/emp/'
 
