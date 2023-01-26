@@ -24,4 +24,12 @@ load data inpath 'hdfs:///tmp/employee.csv' into table tbl_employee;
 
 set hive.cli.print.header = True;
 
+#Managed table with comple data type
+create table tbl_skill(
+id int,
+name string,
+skill array<string>)
+row format delimited
+fields terminated by ','
+
 
