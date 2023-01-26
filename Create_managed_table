@@ -31,6 +31,6 @@ name string,
 skill array<string>)
 row format delimited
 fields terminated by ','
-collection terminated by ':'
+collection items terminated by ':'
 
 
