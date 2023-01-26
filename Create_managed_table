@@ -1,8 +1,23 @@
-create table tbl_employee(emp_id int, location string, email_id string)
+create table tbl_employee(
+emp_id int,
+location string,
+email_id string)
 row format delimited
 fields terminated by ',';
+
+# check the table schema
+describe tbl_employee;
+
+# check table schema with details of table/warehouse location alongg with other information.
+
+describe formatted tbl_employee;
 
 # Load data from local file system
 
 load data local inpath 'file:///employee.csv' into table tbl_employee;
+
+# enable column name in the cli query result
+
+set hive.cli.print.header = True;
+
 
