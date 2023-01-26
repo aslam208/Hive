@@ -16,6 +16,10 @@ describe formatted tbl_employee;
 
 load data local inpath 'file:///employee.csv' into table tbl_employee;
 
+# Load ata from hdfs
+
+load data inpath 'hdfs:///tmp/employee.csv' into table tbl_employee;
+
 # enable column name in the cli query result
 
 set hive.cli.print.header = True;
