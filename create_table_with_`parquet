@@ -1,0 +1,21 @@
+#create table which stores data in parquet format
+
+create table tbl_skill_p(
+id int,
+name string,
+skill string
+)
+stored as parquet;
+
+
+# create table with OTC storagge
+
+create table tbl_skill_orc(
+id int,
+name string,
+skill string)
+stored as orc;
+
+# Load data
+
+from tbl_skill_copy insert overwrite table tbl_skill_p select *;
