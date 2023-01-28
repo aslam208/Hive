@@ -1,0 +1,29 @@
+#create external table with a column of map data type
+create external table tbl_employee_map(
+id int,
+name string,
+details map<string,string>
+) 
+row format delimited
+fields terminated by ','
+collection items terminated by '|'
+map keys terminated by ':';
+
+#Load data to external table
+load data local  inpath 'file:///Users/admin/datasets/csv/map/' 
+into table tbl_employee_map;
+# Query table with column type map
+select id, name, details["age"] as age, details["gender"] as gender from tbl_employee_map;
+
+# create managed table with a column contains map type data
+
+create table tbl_employee_m_e(
+id int,
+name string,
+details map<string,string>
+)
+row format delimited
+fields terminated by ','
+collection items terminated by '|'
+map keys terminated by ':'
+location 'hdfs:////sample_data/emp_map/';
