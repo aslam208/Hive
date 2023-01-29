@@ -13,3 +13,7 @@ stored as textFile
 tblproperties("skip.header.line.count" = "1");
 
 load data local inpath '/Users/admin/datasets/csv/employee_with_header.csv' into table tbl_employee_cerde;
+
+#Dowload serde jar if not already available
+
+hive-hcatalog-core-0.14.0.jar
