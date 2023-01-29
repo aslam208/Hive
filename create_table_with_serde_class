@@ -16,4 +16,16 @@ load data local inpath '/Users/admin/datasets/csv/employee_with_header.csv' into
 
 #Dowload serde jar if not already available
 
-hive-hcatalog-core-0.14.0.jar
+# search and download hive-hcatalog-core-0.14.0.jar
+# add jar to hive terminal
+hive>add jar 'User/Downloads/hive-hcatalog-core-0.14.0.jar';
+
+#create table json serde
+create table tbl_employee_json(
+id int,
+name string,
+skill array<string>)
+row format serde 'org.apache.hive.hcatalog.data.JsonSerDe' 
+stored as textFile;
+
+load data local inpath '/Users/admin/datasets/json/employee_json.json' into table tbl_employee_json;
