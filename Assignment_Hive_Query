@@ -17,3 +17,15 @@ select country, total_sales,
 rank() over(order by total_sales) as ms,
 rank() over(order by total_sales desc) as mxs
 from sales) t where t.ms = 1 or t.mxs=1;
+
+
+
+with sale
+as
+(
+select month_id,year_id, sum(quantityordered) as total_qty from sales_order group by month_id,year_id order by total_qty desc
+)
+select * from ( 
+select month_id,year_id, total_qty,
+rank() over(partition by year_id order by total_qty desc) as t
+from sale) tt where tt.t=1;
