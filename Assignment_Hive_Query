@@ -1,0 +1,19 @@
+
+select year_id, sum(sales) as total_sales from sales_order group by year_id;
+
+select productline, productcode, sum(quantityordered) as total_qty from sales_order group by productline, productcode order by total_qty desc limit 1;
+
+select year_id,qtr_id, sum(sales) as total_sales from sales_order group by year_id,qtr_id order by  year_id desc, qtr_id desc;
+
+select year_id,qtr_id, sum(sales) as total_sales from sales_order group by year_id,qtr_id order by  total_sales asc limit 1;
+
+with sales
+as
+(
+select country, sum(sales) as total_sales from sales_order group by country order by  total_sales asc 
+)
+select country,total_sales from(
+select country, total_sales,
+rank() over(order by total_sales) as ms,
+rank() over(order by total_sales desc) as mxs
+from sales) t where t.ms = 1 or t.mxs=1;
