@@ -1,0 +1,94 @@
+# Download csv file from https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3
+#create table
+
+
+create table fire_call_big(
+CallNumber  string,
+UnitId string,
+IncidentNumber string,
+CallType string,
+CallDate timestamp,
+WatchDate timestamp,
+ReceivedDate timestamp,
+EntryDate timestamp,
+DispatchDate timestamp,
+ResponceDate timestamp,
+OnSceneDate timestamp,
+TransportDate timestamp,
+HospitalDate timestamp,
+CallFinalDisposal timestamp,
+AvailableDate timestamp,
+Adress string,
+City string,
+ZipcodeOfIncidence string,
+Battalion string,
+StationArea string,
+Box string,
+OriginalPriority string,
+Priority string,
+FinalPriority string,
+ASLUnit Boolean,
+CallTypeGroup string,
+NumberOfAlarms int,
+UnitType string,
+UnitsequenceInCallDispatch int,
+FirePreventionDistrict string,
+SupervisorDistrict string,
+Neighborhoods string,
+RowId string ,
+CaseLocation string
+)
+row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+with serdeproperties(
+"separatorChar" =  "," ,
+"quoteChar" = "\"",
+"escapeChar" = "\\" )
+stored as TextFile
+tblproperties("skip.header.line.count" = "1");
+
+#Load data from csv
+load data inpath '/tmp/Fire_Department_Calls_For_Service__2016_.csv' into table Fire_Call;
+
+#create an emplty table for forquet storage
+
+create table fire_call_big_parquet(
+CallNumber  string,
+UnitId string,
+IncidentNumber string,
+CallType string,
+CallDate timestamp,
+WatchDate timestamp,
+ReceivedDate timestamp,
+EntryDate timestamp,
+DispatchDate timestamp,
+ResponceDate timestamp,
+OnSceneDate timestamp,
+TransportDate timestamp,
+HospitalDate timestamp,
+CallFinalDisposal timestamp,
+AvailableDate timestamp,
+Adress string,
+City string,
+ZipcodeOfIncidence string,
+Battalion string,
+StationArea string,
+Box string,
+OriginalPriority string,
+Priority string,
+FinalPriority string,
+ASLUnit Boolean,
+CallTypeGroup string,
+NumberOfAlarms int,
+UnitType string,
+UnitsequenceInCallDispatch int,
+FirePreventionDistrict string,
+SupervisorDistrict string,
+Neighborhoods string,
+RowId string ,
+CaseLocation string
+)
+stored as parquet;
+
+#load data from exiting table to parquet formate table.
+
+from fire_call_big insert overwrite table fire_call_big_parquet select *;
